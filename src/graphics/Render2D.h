@@ -17,9 +17,9 @@ public:
 
 	int initialize();
 
-	void drawCircle(const glm::vec2& pos, float radius, float thickness, const glm::vec3& color, const Window& window);
+	//void drawCircle(const glm::vec2& pos, float radius, float thickness, const glm::vec3& color, const Window& window);
 	void drawBox(const glm::vec2& pos, float width, float height, float thickness, const glm::vec3& color, const Window& window);
-	void drawLine(const glm::vec2& pos1, const glm::vec2& pos2, const Window& window);
+	//void drawLine(const glm::vec2& pos1, const glm::vec2& pos2, const Window& window);
 
 public:
 	static const float SCREEN_SPACE_QUAD[8];

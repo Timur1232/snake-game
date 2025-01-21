@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include "SnakeBody.h"
+#include "Snake.h"
 #include "graphics/Render2D.h"
 
 namespace SnakeGame
@@ -27,11 +27,10 @@ namespace SnakeGame
         void draw();
 
     private:
-        std::vector<SnakeBody> m_Snake;
+        Snake m_Snake;
         glm::ivec2 m_ApplePos = { 0, 0 };
         int m_FieldWidth;
         int m_FieldHeight;
-        static Render2D s_Renderer;
     };
 
 } // SnakeGame

@@ -152,16 +152,18 @@
     <ClInclude Include="src\graphics\loaders\shader_loader.h" />
     <ClInclude Include="src\graphics\Render2D.h" />
     <ClInclude Include="src\graphics\Shader.h" />
-    <ClInclude Include="src\SnakeBody.h" />
+    <ClInclude Include="src\Snake.h" />
     <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Consts.h" />
     <ClCompile Include="src\Events.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\graphics\loaders\shader_loader.cpp" />
     <ClCompile Include="src\graphics\Render2D.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
-    <ClCompile Include="src\SnakeBody.cpp" />
+    <ClCompile Include="src\Snake.cpp" />
+    <ClCompile Include="src\test.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
