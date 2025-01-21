@@ -69,6 +69,10 @@ namespace SnakeGame
                 if (std::cin.get() == 'y')
                 {
                     restart();
+                    timer = std::chrono::high_resolution_clock::now();
+                    end = 0;
+                    std::cin.ignore(INT_MAX, '\n');
+                    continue;
                 }
                 else
                 {
@@ -82,6 +86,10 @@ namespace SnakeGame
                 if (std::cin.get() == 'y')
                 {
                     restart();
+                    timer = std::chrono::high_resolution_clock::now();
+                    end = 0;
+                    std::cin.ignore(INT_MAX, '\n');
+                    continue;
                 }
                 else
                 {
