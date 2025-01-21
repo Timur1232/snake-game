@@ -66,21 +66,6 @@ int Render2D::initialize()
 	return 0;
 }
 
-//void Render2D::drawCircle(const glm::vec2& pos, float radius, float thickness, const glm::vec3& color, const Window& window)
-//{
-//	sm_CircleShader.use();
-//	sm_CircleShader.setUniform("iPosition", pos);
-//	sm_CircleShader.setUniform("iRadius", radius);
-//	sm_CircleShader.setUniform("iThickness", thickness);
-//	sm_CircleShader.setUniform("iResolution", glm::vec2(window.getWidth(), window.getHeight()));
-//	sm_CircleShader.setUniform("iColor", color);
-//	sm_CircleShader.setUniform("iFade", 0.005f);
-//
-//	bindAll();
-//	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-//	unbindAll();
-//}
-
 void Render2D::drawBox(const glm::vec2& pos, float width, float height, float thickness, const glm::vec3& color, const Window& window)
 {
 	sm_BoxShader.use();
@@ -95,24 +80,6 @@ void Render2D::drawBox(const glm::vec2& pos, float width, float height, float th
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	unbindAll();
 }
-
-//void Render2D::drawLine(const glm::vec2& pos1, const glm::vec2& pos2, const Window& window)
-//{
-//}
-
-//int Render2D::loadCircleShader()
-//{
-//	try
-//	{
-//		sm_CircleShader.loadShader("res/shaders/vertex/v_circle.glsl", "res/shaders/fragment/f_circle2.glsl");
-//	}
-//	catch (std::runtime_error& err)
-//	{
-//		std::cerr << err.what() << std::endl;
-//		return -1;
-//	}
-//	return 0;
-//}
 
 int Render2D::loadBoxShader()
 {

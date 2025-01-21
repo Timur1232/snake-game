@@ -16,19 +16,28 @@ namespace SnakeGame
     }
 
     SnakeBody::SnakeBody(const SnakeBody& tail)
-        : m_Direction(tail.getDir()), m_Position(tail.getPos() - tail.getDir())
+        : m_Direction(tail.getDir()), m_Position(tail.getPos())
     {
     }
 
-    void SnakeBody::move()
+    void SnakeBody::move(int width, int height)
     {
         m_Position += m_Direction;
+        if (m_Position.x >= width) m_Position.x = 0;
+        else if (m_Position.x < 0) m_Position.x = width - 1;
+        else if (m_Position.y >= height) m_Position.y = 0;
+        else if (m_Position.y < 0) m_Position.y = height - 1;
     }
 
-    void SnakeBody::move(const SnakeBody& next)
+    void SnakeBody::move(const SnakeBody& next, int width, int height)
     {
         m_Position += m_Direction;
         m_Direction = next.getPos() - m_Position;
+
+        if (m_Position.x >= width) m_Position.x = 0;
+        else if (m_Position.x < 0) m_Position.x = width - 1;
+        else if (m_Position.y >= height) m_Position.y = 0;
+        else if (m_Position.y < 0) m_Position.y = height - 1;
     }
 
     void SnakeBody::turnRight()
@@ -57,9 +66,9 @@ namespace SnakeGame
 
     Render2D Snake::s_Renderer;
 
-    Snake::Snake()
+    Snake::Snake(int reserve)
     {
-        m_Body.reserve(TILES_AMOUNT);
+        m_Body.reserve(reserve);
     }
 
     int Snake::initRenderer()
@@ -69,30 +78,33 @@ namespace SnakeGame
 
     void Snake::createSnake(int x, int y, int dirX, int dirY)
     {
+        m_Body.clear();
         m_Body.emplace_back(glm::ivec2(x, y), glm::ivec2(dirX, dirY));
-        m_Body.emplace_back(m_Body[0]);
+        m_Body.emplace_back(glm::ivec2(x, y) - glm::ivec2(dirX, dirY), glm::ivec2(dirX, dirY));
+        m_LastTailState = m_Body.back();
     }
 
-    void Snake::draw(const Window& window) const
+    void Snake::draw(const Window& window, int tileSize) const
     {
         for (auto& i : m_Body)
         {
-            s_Renderer.drawBox(i.getPos() * glm::ivec2(TILE_SIDE_SIZE / 2) + glm::ivec2(TILE_SIDE_SIZE / 4), TILE_SIDE_SIZE - 3, TILE_SIDE_SIZE - 3, 1.0f, {0, 1, 0}, window);
+            s_Renderer.drawBox(i.getPos() * glm::ivec2(tileSize) + glm::ivec2(tileSize / 2), tileSize - 3, tileSize - 3, 1.0f, {0, 1, 0}, window);
         }
     }
 
-    void Snake::moveForward()
+    void Snake::moveForward(int width, int height)
     {
-        m_Body[0].move();
+        m_LastTailState = m_Body.back();
+        m_Body[0].move(width, height);
         for (int i = 1; i < m_Body.size(); i++)
         {
-            m_Body[i].move(m_Body[i - 1]);
+            m_Body[i].move(m_Body[i - 1], width, height);
         }
     }
 
     void Snake::grow()
     {
-        m_Body.emplace_back(m_Body.back());
+        m_Body.emplace_back(m_LastTailState);
     }
 
     void Snake::turnRight()
@@ -118,6 +130,26 @@ namespace SnakeGame
     const glm::ivec2& Snake::headDir() const
     {
         return m_Body[0].getDir();
+    }
+
+    Snake::SnakeIterator Snake::begin()
+    {
+        return ++m_Body.begin();
+    }
+
+    Snake::SnakeIterator Snake::end()
+    {
+        return m_Body.end();
+    }
+
+    Snake::const_SnakeIterator Snake::begin() const
+    {
+        return ++m_Body.begin();
+    }
+
+    Snake::const_SnakeIterator Snake::end() const
+    {
+        return m_Body.end();
     }
 
 } // SnakeGame

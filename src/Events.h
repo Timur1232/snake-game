@@ -23,6 +23,7 @@ public:
 
 	bool keyPressed(int keycode) const;
 	bool keyJPressed(int keycode) const;
+	bool keyReleased(int keycode) const;
 
 	bool mousePressed(int button) const;
 	bool mouseJPressed(int button) const;

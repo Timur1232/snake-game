@@ -14,7 +14,7 @@
 
 using namespace SnakeGame;
 
-#if 0
+#if 1
 int main()
 {
     Window window;
@@ -42,7 +42,7 @@ int main()
     while (!window.shouldClose())
     {
         events.pollIvents();
-        renderer.drawBox({ 250, 250 }, 35, 35, 1.0f, { 0, 1, 0 }, window);
+        renderer.drawBox({ 125, 125 }, 250, 250, 1.0f, { 0, 1, 0 }, window);
         //renderer.drawBox({ 250, 250 }, 35, 35, 0.0001f, { 1, 0.8, 1 }, window);
         window.swapBuffers();
         window.clearScreen();

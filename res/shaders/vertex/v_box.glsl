@@ -9,8 +9,8 @@ uniform vec2 iResolution;
 void main()
 {
     mat2 scale = mat2(
-        iSize.x / iResolution.x / 2.0, 0.0,
-        0.0, iSize.y / iResolution.y /2.0
+        iSize.x / iResolution.x, 0.0,
+        0.0, iSize.y / iResolution.y
     );
     vec2 pos = v_position;
     pos.x *= iResolution.y / iResolution.x;

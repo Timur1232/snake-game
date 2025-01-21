@@ -53,6 +53,11 @@ bool Events::keyJPressed(int keycode) const
 	return sm_Keys[keycode] && sm_Frames[keycode] == sm_CurrentFrame;
 }
 
+bool Events::keyReleased(int keycode) const
+{
+	return !sm_Keys[keycode] && (sm_Frames[keycode] == sm_CurrentFrame);
+}
+
 bool Events::mousePressed(int button) const
 {
 	int index = MOUSE_BUTTONS + button;

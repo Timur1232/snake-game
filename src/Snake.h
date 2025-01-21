@@ -18,8 +18,8 @@ namespace SnakeGame
         SnakeBody(const glm::ivec2& position, const glm::ivec2& direction);
         SnakeBody(const SnakeBody& tail);
 
-        void move();
-        void move(const SnakeBody& next);
+        void move(int width, int height);
+        void move(const SnakeBody& next, int width, int height);
 
         void turnRight();
         void turnLeft();
@@ -39,14 +39,14 @@ namespace SnakeGame
         using const_SnakeIterator = std::vector<SnakeBody>::const_iterator;
 
     public:
-        Snake();
+        Snake(int reserve);
         //Snake(int xPos, int yPos);
 
         static int initRenderer();
         void createSnake(int x, int y, int dirX, int dirY);
 
-        void draw(const Window& window) const;
-        void moveForward();
+        void draw(const Window& window, int tileSize) const;
+        void moveForward(int width, int height);
         void grow();
         void turnRight();
         void turnLeft();
@@ -63,6 +63,7 @@ namespace SnakeGame
 
     private:
         std::vector<SnakeBody> m_Body;
+        SnakeBody m_LastTailState;
         static Render2D s_Renderer;
     };
 
