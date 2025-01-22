@@ -52,7 +52,6 @@ namespace SnakeGame
     void Game::run()
     {
         auto timer = std::chrono::high_resolution_clock::now();
-        bool tick = false;
         int end = 0;
 
         srand(time(0));
@@ -77,6 +76,7 @@ namespace SnakeGame
                 else
                 {
                     m_Window.setShouldClose(true);
+                    break;
                 }
             }
             else if (end == 2)
@@ -94,29 +94,30 @@ namespace SnakeGame
                 else
                 {
                     m_Window.setShouldClose(true);
+                    break;
                 }
             }
 
             //auto now = std::chrono::high_resolution_clock::now();
             //auto timeLast = std::chrono::milliseconds(m_MovePeriod * 55 / 100);
-            if (m_Events.keyJPressed(GLFW_KEY_UP) && m_Snake.headDir().y == 0)
+            if (m_Events.keyJPressed(GLFW_KEY_UP))
             {
-                if (userInputs.empty() || (userInputs.size() < 2 && userInputs.front() != UP /*&& now - timer <= timeLast)*/))
+                if (userInputs.empty() && m_Snake.headDir().y == 0 || (userInputs.size() < 2 && userInputs.front() != UP && userInputs.front() != DOWN /*&& now - timer <= timeLast)*/))
                     userInputs.push(UP);
             }
-            else if (m_Events.keyJPressed(GLFW_KEY_DOWN) && m_Snake.headDir().y == 0)
+            if (m_Events.keyJPressed(GLFW_KEY_DOWN))
             {
-                if (userInputs.empty() || (userInputs.size() < 2 && userInputs.front() != DOWN /*&& now - timer <= timeLast)*/))
+                if (userInputs.empty() && m_Snake.headDir().y == 0 || (userInputs.size() < 2 && userInputs.front() != DOWN && userInputs.front() != UP /*&& now - timer <= timeLast)*/))
                     userInputs.push(DOWN);
             }
-            else if (m_Events.keyJPressed(GLFW_KEY_RIGHT) && m_Snake.headDir().x == 0)
+            if (m_Events.keyJPressed(GLFW_KEY_RIGHT))
             {
-                if (userInputs.empty() || (userInputs.size() < 2 && userInputs.front() != RIGHT /*&& now - timer <= timeLast)*/))
+                if (userInputs.empty() && m_Snake.headDir().x == 0 || (userInputs.size() < 2 && userInputs.front() != RIGHT && userInputs.front() != LEFT /*&& now - timer <= timeLast)*/))
                     userInputs.push(RIGHT);
             }
-            else if (m_Events.keyJPressed(GLFW_KEY_LEFT) && m_Snake.headDir().x == 0)
+            if (m_Events.keyJPressed(GLFW_KEY_LEFT))
             {
-                if (userInputs.empty() || (userInputs.size() < 2 && userInputs.front() != LEFT /*&& now - timer <= timeLast)*/))
+                if (userInputs.empty() && m_Snake.headDir().x == 0 || (userInputs.size() < 2 && userInputs.front() != LEFT && userInputs.front() != RIGHT /*&& now - timer <= timeLast)*/))
                     userInputs.push(LEFT);
             }
 
@@ -133,12 +134,6 @@ namespace SnakeGame
             {
                 applyHeadTurn();
                 m_Snake.moveForward(m_FieldWidth, m_FieldHeight);
-                tick = true;
-                timer = std::chrono::high_resolution_clock::now();
-            }
-
-            if (tick)
-            {
                 if (m_Snake.headPos() == m_ApplePos)
                 {
                     m_Snake.grow();
@@ -154,7 +149,7 @@ namespace SnakeGame
                     end = 2;
                     continue;
                 }
-                tick = false;
+                timer = std::chrono::high_resolution_clock::now();
             }
 
             drawApple();
