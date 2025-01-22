@@ -47,6 +47,8 @@ namespace SnakeGame
 
         restart();
         createApple();
+
+        return 0;
     }
 
     void Game::run()
@@ -100,22 +102,22 @@ namespace SnakeGame
 
             if (m_Events.keyJPressed(GLFW_KEY_UP))
             {
-                if (userInputs.empty() && m_Snake.headDir().y == 0 || (userInputs.size() < 2 && userInputs.front() != UP && userInputs.front() != DOWN /*&& now - timer <= timeLast)*/))
+                if (userInputs.empty() && m_Snake.headDir().y == 0 || (userInputs.size() < 2 && userInputs.front() != UP && userInputs.front() != DOWN))
                     userInputs.push(UP);
             }
             if (m_Events.keyJPressed(GLFW_KEY_DOWN))
             {
-                if (userInputs.empty() && m_Snake.headDir().y == 0 || (userInputs.size() < 2 && userInputs.front() != DOWN && userInputs.front() != UP /*&& now - timer <= timeLast)*/))
+                if (userInputs.empty() && m_Snake.headDir().y == 0 || (userInputs.size() < 2 && userInputs.front() != DOWN && userInputs.front() != UP))
                     userInputs.push(DOWN);
             }
             if (m_Events.keyJPressed(GLFW_KEY_RIGHT))
             {
-                if (userInputs.empty() && m_Snake.headDir().x == 0 || (userInputs.size() < 2 && userInputs.front() != RIGHT && userInputs.front() != LEFT /*&& now - timer <= timeLast)*/))
+                if (userInputs.empty() && m_Snake.headDir().x == 0 || (userInputs.size() < 2 && userInputs.front() != RIGHT && userInputs.front() != LEFT))
                     userInputs.push(RIGHT);
             }
             if (m_Events.keyJPressed(GLFW_KEY_LEFT))
             {
-                if (userInputs.empty() && m_Snake.headDir().x == 0 || (userInputs.size() < 2 && userInputs.front() != LEFT && userInputs.front() != RIGHT /*&& now - timer <= timeLast)*/))
+                if (userInputs.empty() && m_Snake.headDir().x == 0 || (userInputs.size() < 2 && userInputs.front() != LEFT && userInputs.front() != RIGHT))
                     userInputs.push(LEFT);
             }
 

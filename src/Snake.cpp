@@ -5,9 +5,6 @@
 namespace SnakeGame
 {
 
-    /*const glm::imat2x2 ROT_MAT_CLKWS = { 0, 1, -1, 0 };
-    const glm::imat2x2 ROT_MAT_ANTI_CLKWS = { 0, -1, 1, 0 };*/
-
     //=====================================[SnakeBody]=====================================//
 
     SnakeBody::SnakeBody(const glm::ivec2& position, const glm::ivec2& direction)
@@ -81,6 +78,7 @@ namespace SnakeGame
         m_Body.clear();
         m_Body.emplace_back(glm::ivec2(x, y), glm::ivec2(dirX, dirY));
         m_Body.emplace_back(glm::ivec2(x, y) - glm::ivec2(dirX, dirY), glm::ivec2(dirX, dirY));
+        m_Body.emplace_back(glm::ivec2(x, y) - glm::ivec2(dirX, dirY) * 2, glm::ivec2(dirX, dirY));
         m_LastTailState = m_Body.back();
     }
 
