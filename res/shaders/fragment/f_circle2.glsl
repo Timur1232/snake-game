@@ -22,8 +22,9 @@ void main()
     delta.y = -delta.y;
     uv -= delta;
 
+    float radius = iRadius / iResolution.y;
     float dist = length(uv);
-    float alpha = smoothstep(iRadius - iThickness, iRadius - iThickness + iFade, dist) * smoothstep(iRadius, iRadius - iFade, dist);
+    float alpha = smoothstep(radius - iThickness, radius - iThickness + iFade, dist) * smoothstep(radius, radius - iFade, dist);
 
     vec4 color = vec4(iColor, 1.0);
     color = color * alpha + gl_FragColor.rgba * (1.0 - alpha);

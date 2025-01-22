@@ -4,15 +4,15 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#include "Shader.h"
-#include "../Window.h"
+#include "../shader/Shader.h"
+#include "../../window/Window.h"
 
-namespace SnakeGame
+namespace EngineThing
 {
 
-uint32_t Render2D::sm_VAO = 0;
-uint32_t Render2D::sm_VBO = 0;
-uint32_t Render2D::sm_EBO = 0;
+uint Render2D::sm_VAO = 0;
+uint Render2D::sm_VBO = 0;
+uint Render2D::sm_EBO = 0;
 
 Shader Render2D::sm_CircleShader;
 Shader Render2D::sm_BoxShader;
@@ -25,7 +25,7 @@ const float Render2D::SCREEN_SPACE_QUAD[8] = {
 		1.0f, 1.0f
 };
 
-const uint32_t Render2D::SCREEN_SPACE_INDECIES[6] = {
+const uint_32 Render2D::SCREEN_SPACE_INDECIES[6] = {
 		0, 1, 2,
 		1, 2, 3
 };
@@ -70,7 +70,7 @@ int Render2D::initialize()
 	return 0;
 }
 
-void Render2D::drawCircle(const glm::vec2& pos, int radius, float thickness, const glm::vec3& color, const Window& window)
+void Render2D::drawCircle(const glm::vec2& pos, float radius, float thickness, const glm::vec3& color, const Window& window)
 {
 	sm_CircleShader.use();
 	sm_CircleShader.setUniform("iPosition", pos);
@@ -98,6 +98,10 @@ void Render2D::drawBox(const glm::vec2& pos, float width, float height, float th
 	bindAll();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	unbindAll();
+}
+
+void Render2D::drawLine(const glm::vec2& pos1, const glm::vec2& pos2, const Window& window)
+{
 }
 
 int Render2D::loadCircleShader()
@@ -142,4 +146,4 @@ void Render2D::unbindAll()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-} // SnakeGame
+} // EngineThing

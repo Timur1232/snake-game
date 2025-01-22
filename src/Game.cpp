@@ -98,8 +98,6 @@ namespace SnakeGame
                 }
             }
 
-            //auto now = std::chrono::high_resolution_clock::now();
-            //auto timeLast = std::chrono::milliseconds(m_MovePeriod * 55 / 100);
             if (m_Events.keyJPressed(GLFW_KEY_UP))
             {
                 if (userInputs.empty() && m_Snake.headDir().y == 0 || (userInputs.size() < 2 && userInputs.front() != UP && userInputs.front() != DOWN /*&& now - timer <= timeLast)*/))
@@ -163,13 +161,6 @@ namespace SnakeGame
 
     void Game::restart()
     {
-        /*int x = rand() % (m_FieldWidth - 1) + 1;
-        int y = rand() % (m_FieldHeight - 1) + 1;
-        glm::vec2 dir = glm::vec2(m_FieldWidth / 2, m_FieldHeight / 2) - glm::vec2(x, y);
-        dir /= std::max(dir.x, dir.y);
-        if (abs(dir.x) < 1 && abs(dir.y) < 1) dir = glm::vec2(1, 0);
-        m_Snake.createSnake(x, y, (int)dir.x, (int)dir.y);*/
-
         m_Snake.createSnake(4, m_FieldHeight / 2, 1, 0);
     }
 
@@ -228,7 +219,7 @@ namespace SnakeGame
 
     void Game::drawApple()
     {
-        m_Renderer.drawBox(m_ApplePos * glm::ivec2(m_TileSize) + glm::ivec2(m_TileSize / 2), m_TileSize - 3, m_TileSize - 3, 1.0f, { 1, 0, 0 }, m_Window);
+        m_Renderer.drawCircle(m_ApplePos * glm::ivec2(m_TileSize) + glm::ivec2(m_TileSize / 2), m_TileSize - 3, 1.0f, { 1, 0, 0 }, m_Window);
     }
 
     void Game::applyHeadTurn()

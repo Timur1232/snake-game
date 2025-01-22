@@ -86,10 +86,16 @@ namespace SnakeGame
 
     void Snake::draw(const Window& window, int tileSize) const
     {
-        for (auto& i : m_Body)
+        s_Renderer.drawBox(headPos() * glm::ivec2(tileSize) + glm::ivec2(tileSize / 2), tileSize - 3, tileSize - 3, 1.0f, { 0, 1, 0 }, window);
+        for (auto& i : *this)
         {
             s_Renderer.drawBox(i.getPos() * glm::ivec2(tileSize) + glm::ivec2(tileSize / 2), tileSize - 3, tileSize - 3, 1.0f, {0, 1, 0}, window);
         }
+        s_Renderer.drawBox(
+            headPos() * glm::ivec2(tileSize) + glm::ivec2(tileSize / 2) + (headDir() * (tileSize / 2)),
+            ((tileSize - 3) / 2), ((tileSize - 3) / 2),
+            1.0f, { 1, 0, 0 }, window
+        );
     }
 
     void Snake::moveForward(int width, int height)
